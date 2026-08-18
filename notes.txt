@@ -1,0 +1,5 @@
+ci-continous integration
+
+cd-continous deployment
+
+kubernates acts as an orchestrator for the containers
