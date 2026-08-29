@@ -22,11 +22,11 @@ jobs:
         uses: actions/checkout@v4
 
       # Step 2: Installs and configures the Node.js runtime environment
-      - name: Use Node.js 20.x
+      - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          # Specifies Node.js version 20
-          node-version: '20.x'
+          # Specifies Node.js version 22
+          node-version: '22.x'
 
       # Step 3: Installs project dependencies defined in package-lock.json
       # Note: 'npm ci' is preferred over 'npm install' in CI for fast, reproducible builds
