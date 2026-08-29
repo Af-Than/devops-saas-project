@@ -1,0 +1,23 @@
+{
+  "name": "devops-saas-project",
+  "version": "1.0.0",
+  "description": "DEV OPS TO PROJECT TO LEARN ABOUT DOCKER,C",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "run" :"node index.js"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Af-Than/devops-saas-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Af-Than/devops-saas-project/issues"
+  },
+  "homepage": "https://github.com/Af-Than/devops-saas-project#readme"
+}

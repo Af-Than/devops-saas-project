@@ -1,0 +1,38 @@
+# Name of the workflow as it appears in GitHub Actions UI
+name: CI Pipeline
+
+# Defines the events that trigger the pipeline workflow
+on:
+  # Triggers the pipeline when code is pushed to the repository
+  push:
+    # Restricts the push trigger to run only on the 'main' branch
+    branches: [main]
+
+# Defines the parallel or sequential jobs to execute
+jobs:
+  # Job identifier
+  build:
+    # Specifies the virtual machine runner environment (Ubuntu Linux)
+    runs-on: ubuntu-latest
+
+    # The sequential steps executed inside the build job
+    steps:
+      # Step 1: Downloads a copy of your repository code onto the runner
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Installs and configures the Node.js runtime environment
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          # Specifies Node.js version 20
+          node-version: '20.x'
+
+      # Step 3: Installs project dependencies defined in package-lock.json
+      # Note: 'npm ci' is preferred over 'npm install' in CI for fast, reproducible builds
+      - name: Install Dependencies
+        run: npm ci
+
+      # Step 4: Runs the automated test suite defined in package.json scripts
+      - name: Run Tests
+        run: npm test

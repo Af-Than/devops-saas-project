@@ -3,3 +3,15 @@ ci-continous integration
 cd-continous deployment
 
 kubernates acts as an orchestrator for the containers
+
+yaml:
+    name-- is used to define the workflow or the job titile
+    jobs-- to define the jobs that need to be done 
+    steps-- that are sequetional command or actions 
+    run--shell commands to execute
+
+    uses-used to run prebuilt actions
+    with -pass params to actions
+    env
+    needs-to make one job depend on another
+    
