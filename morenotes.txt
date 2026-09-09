@@ -1,0 +1,108 @@
+docker ps -a : to list all the running containers
+docker stop 1f2:stops the containers based on the identical
+docker container prune : to remove all stopped containers
+docker rm--removes the container
+
+# Tag existing image for Docker Hub
+docker tag mernstack-backend:latest afthan/mernstack-backend:latest
+
+# Push to Docker Hub
+docker push afthan/mernstack-backend:latest
+
+
+When a project has a separate frontend and backend, the cleanest and most standard way to run both locally is using **Docker Compose**.
+
+### Option 1: The Easy Way (Using Docker Compose)
+
+Create a single file named `docker-compose.yml` on your computer. Paste the following configuration, filling in your specific image tags:
+
+```yaml
+version: '3.8'
+
+services:
+  backend:
+    image: afthan/mernstack-backend:latest
+    container_name: mern-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=development
+
+  frontend:
+    image: afthan/mernstack-frontend:latest
+    container_name: mern-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+```
+
+Once saved, open your terminal in the same folder and run:
+
+```bash
+docker compose up
+
+```
+
+Docker will automatically pull both images, build a shared internal network so they can talk to each other, and start both containers together.
+
+---
+
+### Option 2: The Manual Way (Using Docker CLI)
+
+If you prefer to run individual `docker` commands without creating a compose file:
+
+1. **Pull both images:**
+Pull the frontend and backend images into your local environment:
+
+```bash
+docker pull afthan/mernstack-backend:latest
+docker pull afthan/mernstack-frontend:latest
+
+```
+
+*Verification:* Run `docker images` to verify both images appear in your local library.
+
+
+2. **Create a shared Docker network:**
+Create a network so the frontend and backend containers can discover and talk to each other:
+
+```bash
+docker network create app-network
+
+```
+
+*Verification:* Run `docker network ls` to ensure `app-network` exists.
+
+
+3. **Run the backend container:**
+Launch the backend attached to the network:
+
+```bash
+docker run -d --name backend-app --network app-network -p 5000:5000 afthan/mernstack-backend:latest
+
+```
+
+*Verification:* Run `docker ps` and check if `backend-app` is running on port 5000.
+
+
+4. **Run the frontend container:**
+Launch the frontend attached to the same network:
+
+```bash
+docker run -d --name frontend-app --network app-network -p 3000:3000 afthan/mernstack-frontend:latest
+
+```
+
+*Verification:* Visit `http://localhost:3000` in your web browser.
+
+
+---
+
+What framework or technology is your backend using (e.g., Express/Node, Python, Java), and does it need a database like MongoDB or MySQL to function?
+
+
+
+
+kubernetes 
