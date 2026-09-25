@@ -224,6 +224,7 @@ multiple cloud virtual machines.
   - ConfigMap / Secret: Separates configuration data and encrypted credentials
     from container application code.
 
+
 * Basic Deployment Manifest (deployment.yaml):
   apiVersion: apps/v1
   kind: Deployment
@@ -250,6 +251,7 @@ multiple cloud virtual machines.
 9. DEPLOYMENT STRATEGIES & RELIABILITY
 ================================================================================
 
+
 * Rolling Update: Replaces instances one-by-one with zero downtime.
 * Blue / Green Deployment:
   - Spins up a brand new identical environment ("Green") alongside old ("Blue").
@@ -259,9 +261,11 @@ multiple cloud virtual machines.
   - Monitors error rates automatically before rolling out to 100% of servers.
 
 
+
 ================================================================================
 10. RECOMMENDED NEXT STEPS & ROADMAP
 ================================================================================
+
 
 1. Build a full-stack MERN application locally.
 2. Package frontend, backend, and MongoDB using Docker Compose.
@@ -270,6 +274,7 @@ multiple cloud virtual machines.
 5. Practice writing basic Terraform code to provision an AWS S3 bucket or EC2 instance.
 6. Deploy your application to cloud infrastructure (Render, AWS, or Kubernetes cluster).
 ================================================================================
+
 
 
 docker commands

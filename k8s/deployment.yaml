@@ -1,0 +1,109 @@
+# Specifies the Kubernetes API version for Deployments (apps/v1 is standard)
+apiVersion: apps/v1
+
+# Defines the type of Kubernetes resource being created
+kind: Deployment
+
+# Metadata containing identification information for this Deployment
+metadata:
+  # The unique name of the Deployment inside the Kubernetes namespace
+  name: devops-saas-deployment
+  # Key-value tags used to organize and categorize this resource
+  labels:
+    app: devops-saas
+
+# Specification of the desired state and behavior for this Deployment
+spec:
+  # Number of identical Pod instances to run simultaneously
+  replicas: 2
+
+  # Defines how the Deployment finds and manages the Pods it controls
+  selector:
+    # Must match the labels defined under template.metadata.labels
+    matchLabels:
+      app: devops-saas
+
+  # The blueprint/template used to create each Pod
+  template:
+    # Metadata for the individual Pods created from this template
+    metadata:
+      # Labels attached to each created Pod (used by selectors and services)
+      labels:
+        app: devops-saas
+
+    # Detailed specification for what runs inside each Pod
+    spec:
+      # List of containers that will run within each Pod
+      containers:
+        # A descriptive name for the container
+        - name: devops-saas-api
+
+          # The Docker image to pull and run from Docker Hub or local registry
+          image: afthan/devops-saas-project:latest
+
+          # Pull policy: only download image if it is not already present on node
+          imagePullPolicy: IfNotPresent
+
+          # List of network ports exposed by this container
+          ports:
+            # The port number on which the Node.js application listens
+            - containerPort: 3000
+
+          # Environment variables injected into the container's runtime
+          env:
+            # Sets the Node.js environment to production mode
+            - name: NODE_ENV
+              value: "production"
+
+            # Informs the application which port to bind to
+            - name: PORT
+              value: "3000"
+
+            # Injects the dynamic Kubernetes Pod name using the Downward API
+            - name: PODNAME
+              valueFrom:
+                fieldRef:
+                  # Reads the pod name directly from Kubernetes metadata
+                  fieldPath: metadata.name
+
+          # Compute resource allocations for CPU and RAM
+          resources:
+            # Minimum resources guaranteed and reserved for the container
+            requests:
+              # 100 milliCPUs (0.1 CPU core)
+              cpu: "100m"
+              # 128 Megabytes of RAM
+              memory: "128Mi"
+
+            # Maximum resources the container is allowed to consume before throttling/OOM kill
+            limits:
+              # 250 milliCPUs (0.25 CPU core)
+              cpu: "250m"
+              # 256 Megabytes of RAM
+              memory: "256Mi"
+
+          # Periodic probe to check if the container is still healthy and running
+          livenessProbe:
+            # Performs an HTTP GET request to check container health
+            httpGet:
+              # Endpoint defined in index.js to check health
+              path: /health
+              # Target container port to make the request to
+              port: 3000
+            # Wait 10 seconds after container startup before first probe
+            initialDelaySeconds: 10
+            # Repeat the probe check every 10 seconds
+            periodSeconds: 10
+
+          # Periodic probe to check if container is ready to accept incoming user traffic
+          readinessProbe:
+            # Performs an HTTP GET request to check readiness
+            httpGet:
+              # Endpoint defined in index.js to check readiness
+              path: /ready
+              # Target container port to make the request to
+              port: 3000
+            # Wait 5 seconds after container startup before first probe
+            initialDelaySeconds: 5
+            # Repeat the probe check every 5 seconds
+            periodSeconds: 5

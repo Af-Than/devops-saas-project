@@ -106,3 +106,11 @@ What framework or technology is your backend using (e.g., Express/Node, Python, 
 
 
 kubernetes 
+
+cluster:   
+when u deploy a container kubernetes runs it inside a pod 
+a servicse is what is used to connect these pods beacuse if a pod goes down and a new one comes up it will have a different ip
+
+ingress lets users access
+
+minkube is used to manage the kubernetes

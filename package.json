@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "DEV OPS TO PROJECT TO LEARN ABOUT DOCKER,C",
   "main": "index.js",
-  "scripts": {
-    "test": "node test.js",
-    "run" :"node index.js"
 
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js",
+    "run": "node index.js",
+    "dev": "node --watch index.js"
   },
   "repository": {
     "type": "git",
@@ -15,9 +17,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Af-Than/devops-saas-project/issues"
   },
-  "homepage": "https://github.com/Af-Than/devops-saas-project#readme"
+  "homepage": "https://github.com/Af-Than/devops-saas-project#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }

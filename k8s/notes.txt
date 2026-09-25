@@ -1,0 +1,45 @@
+minikube start--to start the k8 service 
+
+minikube dashboard --to see the dashboard
+
+minikube stop --to stop the k8 service
+
+
+
+kubectl apply -f service.yaml
+kubectl apply -f deployment.yaml
+kubectl get all
+kubectl port-forward svc/devops-saas-service 3000:3000
+
+kubectl delete -f service.yaml
+kubectl delete -f deployment.yaml
+kubectl get all
+
+
+kubectl get nodes shows all the node in the cluster 
+
+cluster is a group of multiple interconnected computers (called nodes or servers) that work together seamlessly so that, from the outside, they act as a single, powerful unified system.
+
+Core Components of a Cluster
+                    ┌─────────────────────────┐
+                    │      Control Plane      │
+                    │   (Master / Manager)    │
+                    └────────────┬────────────┘
+                                 │ (Orchestrates Tasks)
+                 ┌───────────────┴───────────────┐
+                 ▼                               ▼
+        ┌─────────────────┐             ┌─────────────────┐
+        │  Worker Node 1  │             │  Worker Node 2  │
+        │  (CPU / RAM)    │             │  (CPU / RAM)    │
+        └─────────────────┘             └─────────────────┘
+Control Plane (Master Node): The "brain" of the cluster. It monitors health, manages user requests, distributes workloads, and maintains system state.
+
+Worker Nodes: The physical or virtual machines that execute the actual application workloads and containers.
+
+Cluster Network: High-speed private networking layer allowing nodes to communicate, transfer data, and route traffic seamlessly.
+
+Why Use a Cluster?
+
+
+
+kubectl apply -f k8s/ to start the cluster
